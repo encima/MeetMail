@@ -38,11 +38,11 @@ class MeetApi:
             if (name not in met and not self.limit) or (name not in met and self.limit and date.month == self.today.month):
                 # add the name and not the meetup to allow different types of meetup from the same groupto be added
                 met.append(name)
-                self.add_meetup(meetup)        
+                self.add_meetup(meetup)
         return (self.subject, self.msg)
 
     def add_meetup(self, meetup):
-        email_body = "\n Name: {} \n".format(meetup['name'])
+        email_body = "\nName: {} \n".format(meetup['name'])
         email_body += "Meetup: {}\n".format(meetup['group']['name'])
         venue = 'TBC'
         if 'venue' in meetup:
