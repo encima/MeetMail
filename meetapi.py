@@ -18,7 +18,8 @@ class MeetApi:
 
     def get_meetups(self, in_file):
         if in_file is None:
-            return requests.get("https://api.meetup.com/self/calendar?photo-host=public&page=20&sig_id=24175662&sig=672eb88f247922fd36ad590603c594acc46f630a").json()
+            meetups = requests.get("https://api.meetup.com/2/open_events?and_text=False&offset=0&city=1012730&format=json&lon=-3.1791&limited_events=False&text_format=plain&photo-host=public&page=20&radius=25.0&category=34&lat=51.4816&desc=False&status=upcoming&sig_id=24181472&sig=be4ad15b9113399dea4f5b9ba55677c4e7a38d4d")
+            return meetups.json()['results']
         else:
             with open(in_file, 'r') as meetups:
                 return meetups.read()
@@ -49,7 +50,7 @@ class MeetApi:
             venue = meetup['venue']['name']
         email_body += "Where: {}\n".format(venue)
         email_body += "When: {}\n".format(meetup['time'])
-        email_body += "Link: {}\n".format(meetup['link'])
+        email_body += "Link: {}\n".format(meetup['event_url'])
         email_body += '\n ----- \n'
         self.msg += email_body
 
